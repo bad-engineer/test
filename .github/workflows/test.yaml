@@ -20,5 +20,9 @@ jobs:
           # Your ML workflow goes here
           pip install -r requirements.txt
           python train.py
-          echo "Model Metrics"
-          cat "metrics.txt"
+          echo "##Model Test" >> report.md
+          cat "metrics.txt">> report.md
+          echo "## Viz" >> report.md
+          cml-publish residuals.png --md >> report.md
+          cml-publish features.png --md >> report.md
+          cml-send-comment report.md
